@@ -27,9 +27,6 @@ int main()
             printf("%lf", F);
             break;
         case 3:
-            if (x > -1) {
-                printf("Error");
-            }
             Y = log(2 * pow(a, 2) - 7 * a * x + 6 * pow(x, 2) + 1);
             printf("Result: ");
             printf("%lf", Y);
