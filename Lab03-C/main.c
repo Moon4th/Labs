@@ -22,6 +22,8 @@ int main() {
             scanf("%lf", &x);
             printf("Enter a (any value):");
             scanf("%lf", &a);
+            if(x<=0 || x>10)
+                printf("invalid value of variable x, try to enter again\n");
             if(x<=0 || x>10)continue;
             else break;
         }
