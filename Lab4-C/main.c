@@ -22,28 +22,20 @@ int main() {
         scanf("%lf",&xmin);
         printf("Enter maximum value of x:"); //Ввод максимального значения x
         scanf("%lf",&xmax);
-        while (xmin>=xmax){ //Цикл проверяющий в правильночти выбор границ x
+        while (xmin>=xmax) { //Цикл проверяющий в правильночти выбор границ x
             printf("Maximum value of x should be grater than the minimum\n");
-            printf("Minimum value = %lf\n",xmin);
+            printf("Minimum value = %lf\n", xmin);
             printf("Enter maximum value of x again:");
-            scanf("%lf",&xmax);
+            scanf("%lf", &xmax);
         }
-        printf("Enter minimum value of a:");//Ввод минимального значения a
-        scanf("%lf",&amin);
-        printf("Enter maximum value of a:");//Ввод максимального значения a
-        scanf("%lf",&amax);
-        while (amin>=amax){ //Цикл проверяющий в правильночти выбор границ a
-            printf("Maximum value of a should be grater than the minimum\n");
-            printf("Minimum value = %lf\n",amin);
-            printf("Enter maximum value of a again:");
-            scanf("%lf",&amax);
-        }
+        printf("Enter a (any value):");
+        scanf("%lf",&a);
         printf("Enter the number of steps:");//Ввод количества шагов вычисления функции
         scanf("%d",&steps);
         double results[steps];
         switch (formula) { //Переключение на одну из 3 формулы в зависимости от начального выбора
             case 1: {
-                for(x=xmin,a=amin,i = 0;x<=xmax, a<=amax, i<steps;x += (xmax - xmin) / (steps - 1),a += (amax - amin) / (steps - 1),i++){//Цикл вычисления формулы с учетом данных введенных выше
+                for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){//Цикл вычисления формулы с учетом данных введенных выше
                     G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
                     results[i]=G;
                     printf("x=%lf",x);
@@ -52,7 +44,7 @@ int main() {
                 break;
             }
             case 2: {
-                for(x=xmin,a=amin,i = 0;x<=xmax, a<=amax, i<steps;x += (xmax - xmin) / (steps - 1),a += (amax - amin) / (steps - 1),i++){
+                for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
                     F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
                     results[i]=F;
                     printf("x=%lf",x);
@@ -61,7 +53,7 @@ int main() {
                 break;
             }
             case 3: {
-                for(x=xmin,a=amin,i = 0;x<=xmax, a<=amax, i<steps;x += (xmax - xmin) / (steps - 1),a += (amax - amin) / (steps - 1),i++){
+                for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
                     if (x < 0) {
                         printf("Error");
                         return 0;
@@ -74,7 +66,7 @@ int main() {
                 break;
             }
         }
-        for (maxvalue=0,i=0,minvalue=0;i<steps;i++) {//Нахождение максимального и минимального значения
+        for (maxvalue=0,i=0,minvalue=results[0];i<steps;i++) {//Нахождение максимального и минимального значения
             if (results[i]>maxvalue){
                 maxvalue=results[i];
             }
