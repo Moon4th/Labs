@@ -33,18 +33,21 @@ int main() {
         printf("Enter the number of steps:");//Ввод количества шагов вычисления функции
         scanf("%d",&steps);
         switch (formula) { //Переключение на одну из 3 формулы в зависимости от начального выбора
-            case 1:
-                for(x=xmin;x<=xmax;x += (xmax - xmin) / (steps - 1)){//Цикл вычисления формулы с учетом данных введенных выше
+            case 1: {
+                for (x = xmin; x <= xmax; x += (xmax - xmin) /
+                                               (steps - 1)) {//Цикл вычисления формулы с учетом данных введенных выше
                     G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
                     printf("%lf\n", G);
                 }
                 break;
-            case 2:
-                for(x=xmin;x<=xmax;x += (xmax - xmin) / (steps - 1)){
+            }
+            case 2: {
+                for (x = xmin; x <= xmax; x += (xmax - xmin) / (steps - 1)) {
                     F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
                     printf("%lf\n", F);
                 }
                 break;
+            }
             case 3:
                 for(x=xmin;x<=xmax;x += (xmax - xmin) / (steps - 1)){
                     if (x < 0)
