@@ -18,6 +18,9 @@ int main() {
             printf("Select the formula:");
             scanf("%d", &formula);
         }
+        if (formula==3){
+            printf("For this formula x might be >=0\n");
+        }
         printf("Enter minimum value of x:"); //Ввод минимального значения x
         scanf("%lf",&xmin);
         printf("Enter maximum value of x:"); //Ввод максимального значения x
