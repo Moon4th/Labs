@@ -10,7 +10,7 @@ int main()
     printf("Formula 2: F = atan(24*pow(a,2)-25*a*x+6*pow(x,2)\n");
     printf("Formula 3: Y= log(2*pow(a,2)-7*a*x+6*pow(x,2)+1)\n");
     scanf("%d",&formula);
-    if (formula=3){
+    if (formula==3){
         printf("For this formula x might be >=0\n");
     }
     printf("Enter x: ");
