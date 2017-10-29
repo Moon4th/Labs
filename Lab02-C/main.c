@@ -4,17 +4,20 @@
 int main()
 {
     double a, x, G, F, Y;
-    int n;
+    int formula;
     printf("select the formula\n");
     printf("Formula 1: G = 4*(-4*pow(a,2)+a*x+5*pow(x,2))/-20*pow(a,2)+28*a*x+3*pow(x,2)\n");
     printf("Formula 2: F = atan(24*pow(a,2)-25*a*x+6*pow(x,2)\n");
     printf("Formula 3: Y= log(2*pow(a,2)-7*a*x+6*pow(x,2)+1)\n");
-    scanf("%d",&n);
+    scanf("%d",&formula);
+    if (formula=3){
+        printf("For this formula x might be >=0\n");
+    }
     printf("Enter x: ");
     scanf("%lf", &x);
     printf("Enter a:");
     scanf("%lf",&a);
-        switch (n) {
+        switch (formula) {
             case 1:
                 G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
                 printf("Result: ");
