@@ -2,7 +2,8 @@
 #include<math.h>
 int main() {
     double a, x, G, F, Y,xmax,xmin,minvalue,maxvalue,denominator;
-    int formula,steps,i;
+    int formula,i,steps;
+    double results[100];
     while (formula != 0){
         printf("Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
         printf("Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
@@ -16,7 +17,7 @@ int main() {
             scanf("%d", &formula);
         }
         if (formula == 0) {//Выход из программы
-            printf("Shutdown");
+            printf("Shutdown...");
             break;
         }
         printf("Enter minimum value of x:"); //Ввод минимального значения x
@@ -38,7 +39,6 @@ int main() {
             scanf("%d",&steps);
         }
         scanf("%d",&steps);
-        double results[steps];
         switch (formula) { //Переключение на одну из 3 формулы в зависимости от начального выбора
             case 1: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){//Цикл вычисления формулы с учетом данных введенных выше
