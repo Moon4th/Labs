@@ -11,9 +11,6 @@ int main() {
     printf("Select the formula:\n");
     scanf("%d", &choice);//Выбор дальнейших действий программы
 
-    if (choice == 0)
-        printf ("Shutdown...");
-
     while ((choice < 0) || (choice > 3)) { //Проверка правильности выбора формулы
         printf("Invalid value, try again\n");
         printf("Select the formula:");
@@ -85,14 +82,13 @@ int main() {
         printf("Select the formula:\n");
         scanf("%d", &choice);//Выбор дальнейших действий программы
 
-        if (choice ==0)
-            printf ("Shutdown...");
-
         while ((choice < 0) || (choice > 3)) { //Проверка правильности выбора формулы
             printf("Invalid value, try again\n");
             printf("Select the formula:");
             scanf("%d", &choice);
         }
+
         }
+    printf ("Shutdown...");
     return 0;
 }
