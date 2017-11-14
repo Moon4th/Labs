@@ -2,10 +2,11 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#define length 100
 
 int main() {
-    double a, x, G, F, Y,xmax,xmin,minvalue,maxvalue,denominator;
-    int choice,steps,i,number;
+    double a,x,G,F,Y,xmax,xmin,minvalue,maxvalue,denominator,results[length];
+    int choice,steps,i,number,counter=0,ncounter=0;
     char stepss[256],xmaxs[256],xmins[256],result[256],p[256],snumber[256],template[256],*index;
 
     printf("1-Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
@@ -19,12 +20,12 @@ int main() {
     while ((choice < 0) || (choice > 4)) { //Проверка правильности выбора
         printf("Invalid value, try again\n");
         printf("Select the formula:");
-        scanf("%d", &choice); }
+        scanf("%d", &choice);
+    }
 
     while (choice != 0){
 
         if (choice == 4){//Программа для поиска четных цифр в числе
-            int ncounter = 0;
             printf("Enter the number:");
             scanf("%s",snumber);
             while (strstr(snumber,".")){//Проверка числа на его тип
@@ -82,10 +83,13 @@ int main() {
             steps = atoi(stepss);
         }
 
-        double results [steps];
         switch (choice) { //Переключение на одну из 3 формулы в зависимости от начального выбора
             case 1: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){//Цикл вычисления формулы с учетом данных введенных выше
+                    if (i>=length){
+                        printf ("Error, calculations can not continue, because the array ended\n");
+                        break;
+                    }
                     denominator = -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
                     if (denominator == 0){
                         printf("The input values do not belong to the domain of the function definition");
@@ -102,6 +106,10 @@ int main() {
             }
             case 2: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
+                    if (i>=length){
+                        printf ("Error, calculations can not continue, because the array ended\n");
+                        break;
+                    }
                     F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
                     results[i]=F;
                     printf("x=%lf",x);
@@ -113,6 +121,10 @@ int main() {
             }
             case 3: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
+                    if (i>=length){
+                        printf ("Error, calculations can not continue, because the array ended\n");
+                        break;
+                    }
                     if (x < 0 || a < 0) {
                         printf("The input values do not belong to the domain of the function definition");
                     }
@@ -128,6 +140,9 @@ int main() {
         }
 
         for (maxvalue=0,i=0,minvalue=results[0];i<steps;i++) {//Нахождение максимального и минимального значения
+            if (i>length){
+                break;
+            }
             if (results[i]>maxvalue){
                 maxvalue=results[i];
             }
@@ -139,7 +154,6 @@ int main() {
         printf ("Maximum value=%lf\n",maxvalue);
         printf ("Result string-%s\n",result);
 
-        int counter = 0;//Поиск совпадений
         printf ("Enter the template:\n");
         scanf ("%s",template);//Шаблон
         index = strstr(result, template);//Находит место совпадения
@@ -149,6 +163,10 @@ int main() {
             index = strstr(result, template);
         }
         printf("Number of coincidences: %d\n",counter);
+
+        for (i=0;i<length;i++){
+            results[i] = 0;
+        }
 
         printf("1-Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
         printf("2-Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
@@ -161,10 +179,9 @@ int main() {
         while ((choice < 0) || (choice > 4)) { //Проверка правильности выбора
             printf("Invalid value, try again\n");
             printf("Select the formula:");
-            scanf("%d", &choice); }
-
+            scanf("%d", &choice);
+        }
     }
-
     printf ("Shutdown...");
     return 0;
 }
