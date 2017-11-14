@@ -2,12 +2,16 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#define length 100
 
 int main() {
 
     double a, x, G, F, Y,xmax,xmin,minvalue,maxvalue,denominator,finalmaxvalue,finalminvalue;
-    int choice,steps,i,number;
+    int choice,steps,i,number,ncounter = 0,counter = 0;
     char stepss[256],xmaxs[256],xmins[256],result[256],p[256],snumber[256],template[256],*index,Gresult[256],Fresult[256],Yresult[256];
+    struct mass {
+        double  values [length];
+    }results;
 
     printf ("Enter 1 to start the program\n");
     printf ("Enter 0 to quit");
@@ -21,7 +25,6 @@ int main() {
     while (choice != 0) {
 
         //Программа для поиска четных цифр в числе
-        int ncounter = 0;
         printf("Enter the number:");
         scanf("%s", snumber);
         while (strstr(snumber, ".")) {//Проверка числа на его тип
@@ -61,10 +64,6 @@ int main() {
         scanf("%s", &stepss);
         steps = atoi(stepss);
 
-        struct mass {
-            double  values [steps];
-        }results;
-
         while (steps <= 0) {//Проверка на корректный ввод кол-ва шагов
             printf("Error,the number of steps can not be less than or equal to 0\n");
             printf("Enter the number of steps:");
@@ -74,6 +73,10 @@ int main() {
 
         for (x = xmin, i = 0; x <= xmax, i < steps; x += (xmax - xmin) / (steps -
                                                                           1), i++) {//Цикл вычисления формулы с учетом данных введенных выше
+            if (i>=length){
+                printf ("Error, calculations can not continue, because the array ended\n");
+                break;
+            }
             denominator = -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
             if (denominator == 0) {
                 printf("The input values do not belong to the domain of the function definition");
@@ -90,6 +93,9 @@ int main() {
 
         for (maxvalue = 0, i = 0, minvalue = results.values[0];
              i < steps; i++) {//Нахождение максимального и минимального значения
+            if (i>length){
+                break;
+            }
             if (results.values[i] > maxvalue)
                 maxvalue = results.values[i];
             if (results.values[i] < minvalue)
@@ -102,7 +108,7 @@ int main() {
         printf("Maximum value=%lf\n", maxvalue);
         printf("Result string-%s\n", Gresult);
 
-        int counter = 0;//Поиск совпадений
+        counter = 0;//Поиск совпадений
         printf("Enter the template:\n");
         scanf("%s", template);//Шаблон
         index = strstr(Gresult, template);//Находит место совпадения
@@ -112,6 +118,10 @@ int main() {
             index = strstr(Gresult, template);
         }
         printf("Number of coincidences: %d\n", counter);
+
+        for (i=0;i<length;i++){
+            results.values[i] = 0;
+        }
 
         for (x = xmin, i = 0; x <= xmax, i < steps; x += (xmax - xmin) / (steps - 1), i++) {
             F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
@@ -148,6 +158,10 @@ int main() {
             index = strstr(Fresult, template);
         }
         printf("Number of coincidences: %d\n", counter);
+
+        for (i=0;i<length;i++){
+            results.values[i] = 0;
+        }
 
         for (x = xmin, i = 0; x <= xmax, i < steps; x += (xmax - xmin) / (steps - 1), i++) {
             if (x < 0 || a < 0) {
@@ -192,7 +206,6 @@ int main() {
         printf ("Final minimum value = %lf\n",finalminvalue);
         printf("Final result string-%s\n", result);
 
-        counter = 0;//Поиск совпадений
         printf("Enter the template:\n");
         scanf("%s", template);//Шаблон
         index = strstr(result, template);//Находит место совпадения
@@ -202,6 +215,10 @@ int main() {
             index = strstr(result, template);
         }
         printf("Number of coincidences: %d\n", counter);
+
+        for (i=0;i<length;i++){
+            results.values[i] = 0;
+        }
 
         printf("Enter 1 to continue the program\n");
         printf("Enter 0 to quit");
