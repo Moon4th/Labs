@@ -9,7 +9,7 @@ int main() {
 
     double a, x, G, F, Y,xmax,xmin,minvalue,maxvalue,denominator,finalmaxvalue,finalminvalue;
     int choice,steps,i,number,ncounter = 0,counter = 0;
-    char stepss[256],xmaxs[256],xmins[256],result[256],p[256],snumber[256],template[256],*index,Gresult[256],Fresult[256],Yresult[256];
+    char stepss[256],xmaxs[256],xmins[256],result[256] = {0},p[256],snumber[256],template[256],*index,Gresult[256] = {0},Fresult[256] = {0},Yresult[256] = {0};
     struct mass {
         double  values [length];
     }results;
