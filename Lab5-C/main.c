@@ -6,8 +6,8 @@
 
 int main() {
     double a,x,G,F,Y,xmax,xmin,minvalue,maxvalue,denominator,results[length];
-    int choice,steps,i,number,counter=0,ncounter=0;
-    char stepss[256],xmaxs[256],xmins[256],result[256],p[256],snumber[256],template[256],*index;
+    int choice,steps,i,number,counter=0,ncounter=0,q = 0;
+    char stepss[256],xmaxs[256],xmins[256],result[256] = {0},p[256],snumber[256],template[256],*index;
 
     printf("1-Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
     printf("2-Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
