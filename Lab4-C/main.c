@@ -1,24 +1,28 @@
 #include <stdio.h>
 #include <math.h>
-#define length 100
+#include <string.h>
+#define size 100
 
 int main() {
-    double a,x,G,F,Y,xmax,xmin,minvalue,maxvalue,denominator,results[length];
-    int choice,i,steps;
-
-    printf("Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
-    printf("Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
-    printf("Formula 3: Y= log (2 * pow(a,2) - 7 * a * x + 6 * pow (x,2) + 1)\n");
-    printf("Enter 0 to quit\n");
-    printf("Select the formula:\n");
-    scanf("%d", &choice);//Выбор дальнейших действий программы
-    while ((choice < 0) || (choice > 3)) { //Проверка правильности выбора формулы
-        printf("Invalid value, try again\n");
-        printf("Select the formula:");
-        scanf("%d", &choice);
-    }
+    double a, x, G, F, Y, xmax, xmin, minvalue, maxvalue, denominator, results[size];
+    int choice = 1, i , steps;
 
     while (choice != 0){
+
+        printf("Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
+        printf("Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
+        printf("Formula 3: Y= log (2 * pow(a,2) - 7 * a * x + 6 * pow (x,2) + 1)\n");
+        printf("Enter 0 to quit\n");
+        printf("Select the formula:\n");
+        scanf("%d", &choice);//Выбор дальнейших действий программы
+        while ((choice < 0) || (choice > 3)) { //Проверка правильности выбора формулы
+            printf("Invalid value, try again\n");
+            printf("Select the formula:");
+            scanf("%d", &choice);
+        }
+        if (choice == 0) {
+            break;
+        }
 
         printf("Enter minimum value of x:"); //Ввод минимального значения x
         scanf("%lf",&xmin);
@@ -34,21 +38,21 @@ int main() {
         printf("Enter a:");
         scanf("%lf",&a);
 
-        printf("Enter the number of steps:");//Ввод количества шагов вычисления функции
+        printf("Enter the number of steps,not more than %d:", size);//Ввод количества шагов вычисления функции
         scanf("%d",&steps);
         while(steps<=0){//Проверка на корректный ввод кол-ва шагов
             printf("Error,the number of steps can not be less than or equal to 0\n");
-            printf("Enter the number of steps:");
+            printf("Enter the number of steps,not more than %d:",size);
             scanf("%d",&steps);
+        }
+        if (steps>=size){
+            printf ("Error,too many steps\n");
+            break;
         }
 
         switch (choice) { //Переключение на одну из 3 формулы в зависимости от начального выбора
             case 1: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){//Цикл вычисления формулы с учетом данных введенных выше
-                    if (i>=length){
-                        printf ("Error, calculations can not continue, because the array ended\n");
-                        break;
-                    }
                     denominator = -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
                     if (denominator == 0){
                         printf("The input values do not belong to the domain of the function definition");
@@ -63,10 +67,6 @@ int main() {
             }
             case 2: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
-                    if (i>=length){
-                        printf ("Error, calculations can not continue, because the array ended\n");
-                        break;
-                    }
                     F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
                     results[i]=F;
                     printf("x=%lf",x);
@@ -76,10 +76,6 @@ int main() {
             }
             case 3: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
-                    if (i>=length){
-                        printf ("Error, calculations can not continue, because the array ended\n");
-                        break;
-                    }
                     if (x < 0 || a < 0) {
                         printf("The input values do not belong to the domain of the function definition");
                         continue;
@@ -94,9 +90,6 @@ int main() {
         }
 
         for (maxvalue=0,i=0,minvalue=results[0];i<steps;i++) {//Нахождение максимального и минимального значения
-            if (i>length){
-                break;
-            }
             if (results[i]>maxvalue){
                 maxvalue=results[i];
             }
@@ -107,22 +100,7 @@ int main() {
         printf ("Minimum value=%lf\n",minvalue);
         printf ("Maximum value=%lf\n",maxvalue);
 
-        for (i=0;i<length;i++){
-            results[i] = 0;
-        }
-
-        printf("Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
-        printf("Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
-        printf("Formula 3: Y= log (2 * pow(a,2) - 7 * a * x + 6 * pow (x,2) + 1)\n");
-        printf("Enter 0 to quit\n");
-        printf("Select the formula:\n");
-        scanf("%d", &choice);//Выбор дальнейших действий программы
-
-        while ((choice < 0) || (choice > 3)) { //Проверка правильности выбора формулы
-            printf("Invalid value, try again\n");
-            printf("Select the formula:");
-            scanf("%d", &choice);
-        }
+        memset (results,0,size);
     }
     printf ("Shutdown...");
     return 0;
