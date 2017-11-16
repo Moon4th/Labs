@@ -2,27 +2,30 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#define length 100
+#define size 100
+#define str 256
 
 int main() {
 
-    double a, x, G, F, Y,xmax,xmin,minvalue,maxvalue,denominator,finalmaxvalue,finalminvalue;
-    int choice,steps,i,number,ncounter = 0,counter = 0;
-    char stepss[256],xmaxs[256],xmins[256],result[256] = {0},p[256],snumber[256],template[256],*index,Gresult[256] = {0},Fresult[256] = {0},Yresult[256] = {0};
+    double a, x, G, F, Y, xmax, xmin, minvalue, maxvalue, denominator, finalmaxvalue, finalminvalue;
+    int choice, steps, i, number, ncounter = 0, counter = 0;
+    char stepss[str], xmaxs[str], xmins[str], result[str] = {0}, p[str], snumber[str], template[str], *index, Gresult[str] = {0}, Fresult[str] = {0}, Yresult[str] = {0};
     struct mass {
-        double  values [length];
+        double  values [size];
     }results;
 
-    printf ("Enter 1 to start the program\n");
-    printf ("Enter 0 to quit");
-    scanf ("%d",&choice);
-
-    while ((choice < 0) || (choice > 1)) { //Проверка правильности выбора
-        printf("Invalid value, try again\n");
-        printf("Enter again:");
-        scanf("%d", &choice); }
-
     while (choice != 0) {
+
+        printf ("Enter 1 to start the program\n");
+        printf ("Enter 0 to quit");
+        scanf ("%d",&choice);
+        while ((choice < 0) || (choice > 1)) { //Проверка правильности выбора
+            printf("Invalid value, try again\n");
+            printf("Enter again:");
+            scanf("%d", &choice); }
+        if (choice == 0) {
+            break;
+        }
 
         //Программа для поиска четных цифр в числе
         printf("Enter the number:");
@@ -60,23 +63,22 @@ int main() {
         printf("Enter a:");
         scanf("%lf", &a);
 
-        printf("Enter the number of steps:");//Ввод количества шагов вычисления функции
+        printf("Enter the number of steps,not more than %d:",size);//Ввод количества шагов вычисления функции
         scanf("%s", &stepss);
         steps = atoi(stepss);
-
         while (steps <= 0) {//Проверка на корректный ввод кол-ва шагов
             printf("Error,the number of steps can not be less than or equal to 0\n");
-            printf("Enter the number of steps:");
+            printf("Enter the number of steps,not more than %d:",size);
             scanf("%s", &stepss);
             steps = atoi(stepss);
+        }
+        if (steps>=size){
+            printf ("Error,too many steps\n");
+            break;
         }
 
         for (x = xmin, i = 0; x <= xmax, i < steps; x += (xmax - xmin) / (steps -
                                                                           1), i++) {//Цикл вычисления формулы с учетом данных введенных выше
-            if (i>=length){
-                printf ("Error, calculations can not continue, because the array ended\n");
-                break;
-            }
             denominator = -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
             if (denominator == 0) {
                 printf("The input values do not belong to the domain of the function definition");
@@ -93,9 +95,6 @@ int main() {
 
         for (maxvalue = 0, i = 0, minvalue = results.values[0];
              i < steps; i++) {//Нахождение максимального и минимального значения
-            if (i>length){
-                break;
-            }
             if (results.values[i] > maxvalue)
                 maxvalue = results.values[i];
             if (results.values[i] < minvalue)
@@ -119,9 +118,7 @@ int main() {
         }
         printf("Number of coincidences: %d\n", counter);
 
-        for (i=0;i<length;i++){
-            results.values[i] = 0;
-        }
+        memset (results.values,0,size);
 
         for (x = xmin, i = 0; x <= xmax, i < steps; x += (xmax - xmin) / (steps - 1), i++) {
             F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
@@ -159,9 +156,7 @@ int main() {
         }
         printf("Number of coincidences: %d\n", counter);
 
-        for (i=0;i<length;i++){
-            results.values[i] = 0;
-        }
+        memset (results.values,0,size);
 
         for (x = xmin, i = 0; x <= xmax, i < steps; x += (xmax - xmin) / (steps - 1), i++) {
             if (x < 0 || a < 0) {
@@ -216,14 +211,7 @@ int main() {
         }
         printf("Number of coincidences: %d\n", counter);
 
-        for (i=0;i<length;i++){
-            results.values[i] = 0;
-        }
-
-        printf("Enter 1 to continue the program\n");
-        printf("Enter 0 to quit");
-        scanf("%d", &choice);
-
+        memset (results.values,0,size);
     }
     printf ("Shutdown...");
     return 0;
