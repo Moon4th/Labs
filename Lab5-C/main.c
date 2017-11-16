@@ -2,28 +2,32 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#define length 100
+#define size 100
+#define str 256
 
 int main() {
-    double a,x,G,F,Y,xmax,xmin,minvalue,maxvalue,denominator,results[length];
-    int choice,steps,i,number,counter=0,ncounter=0,q = 0;
-    char stepss[256],xmaxs[256],xmins[256],result[256] = {0},p[256],snumber[256],template[256],*index;
-
-    printf("1-Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
-    printf("2-Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
-    printf("3-Formula 3: Y= log (2 * pow(a,2) - 7 * a * x + 6 * pow (x,2) + 1)\n");
-    printf("4-Program for finding even numerals in the number\n");
-    printf("Enter 0 to quit\n");
-    printf("Choose what you want:\n");
-    scanf("%d", &choice);//Выбор дальнейших действий программы
-
-    while ((choice < 0) || (choice > 4)) { //Проверка правильности выбора
-        printf("Invalid value, try again\n");
-        printf("Select the formula:");
-        scanf("%d", &choice);
-    }
+    double a, x, G, F, Y, xmax, xmin, minvalue, maxvalue, denominator, results[size];
+    int choice = 1, steps, i, number, counter=0, ncounter=0;
+    char stepss[str], xmaxs[str], xmins[str], result[str] = {0}, p[str], snumber[str], template[str], *index;
 
     while (choice != 0){
+
+        printf("1-Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
+        printf("2-Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
+        printf("3-Formula 3: Y= log (2 * pow(a,2) - 7 * a * x + 6 * pow (x,2) + 1)\n");
+        printf("4-Program for finding even numerals in the number\n");
+        printf("Enter 0 to quit\n");
+        printf("Choose what you want:\n");
+        scanf("%d", &choice);//Выбор дальнейших действий программы
+
+        while ((choice < 0) || (choice > 4)) { //Проверка правильности выбора
+            printf("Invalid value, try again\n");
+            printf("Select the formula:");
+            scanf("%d", &choice);
+        }
+        if (choice == 0) {
+            break;
+        }
 
         if (choice == 4){//Программа для поиска четных цифр в числе
             printf("Enter the number:");
@@ -72,24 +76,24 @@ int main() {
 
         printf("Enter a:");
         scanf("%lf",&a);
-        printf("Enter the number of steps:");//Ввод количества шагов вычисления функции
+        printf("Enter the number of steps,not more than %d:",size);//Ввод количества шагов вычисления функции
         scanf("%s",&stepss);
         steps = atoi(stepss);
 
         while(steps<=0){//Проверка на корректный ввод кол-ва шагов
             printf("Error,the number of steps can not be less than or equal to 0\n");
-            printf("Enter the number of steps:");
+            printf("Enter the number of steps,not more than %d:",size);
             scanf("%s",&stepss);
             steps = atoi(stepss);
+        }
+        if (steps>=size){
+            printf ("Error,too many steps\n");
+            break;
         }
 
         switch (choice) { //Переключение на одну из 3 формулы в зависимости от начального выбора
             case 1: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){//Цикл вычисления формулы с учетом данных введенных выше
-                    if (i>=length){
-                        printf ("Error, calculations can not continue, because the array ended\n");
-                        break;
-                    }
                     denominator = -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
                     if (denominator == 0){
                         printf("The input values do not belong to the domain of the function definition");
@@ -106,10 +110,6 @@ int main() {
             }
             case 2: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
-                    if (i>=length){
-                        printf ("Error, calculations can not continue, because the array ended\n");
-                        break;
-                    }
                     F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
                     results[i]=F;
                     printf("x=%lf",x);
@@ -121,10 +121,6 @@ int main() {
             }
             case 3: {
                 for(x=xmin,i = 0;x<=xmax, i<steps;x += (xmax - xmin) / (steps - 1),i++){
-                    if (i>=length){
-                        printf ("Error, calculations can not continue, because the array ended\n");
-                        break;
-                    }
                     if (x < 0 || a < 0) {
                         printf("The input values do not belong to the domain of the function definition");
                     }
@@ -140,9 +136,6 @@ int main() {
         }
 
         for (maxvalue=0,i=0,minvalue=results[0];i<steps;i++) {//Нахождение максимального и минимального значения
-            if (i>length){
-                break;
-            }
             if (results[i]>maxvalue){
                 maxvalue=results[i];
             }
@@ -164,23 +157,7 @@ int main() {
         }
         printf("Number of coincidences: %d\n",counter);
 
-        for (i=0;i<length;i++){
-            results[i] = 0;
-        }
-
-        printf("1-Formula 1: G = 4*(-4 * pow(a, 2) +a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x+ 3 * pow(x, 2)\n");
-        printf("2-Formula 2: F = atan (24 * pow(a,2) - 25 * a * x + 6 * pow (x,2)\n");
-        printf("3-Formula 3: Y= log (2 * pow(a,2) - 7 * a * x + 6 * pow (x,2) + 1)\n");
-        printf("4-Program for finding even numerals in the number\n");
-        printf("Enter 0 to quit\n");
-        printf("Choose what you want:\n");
-        scanf("%d", &choice);//Выбор дальнейших действий программы
-
-        while ((choice < 0) || (choice > 4)) { //Проверка правильности выбора
-            printf("Invalid value, try again\n");
-            printf("Select the formula:");
-            scanf("%d", &choice);
-        }
+        memset (results,0,size);
     }
     printf ("Shutdown...");
     return 0;
