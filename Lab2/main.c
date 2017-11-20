@@ -23,13 +23,13 @@ int main()
                     printf("The input values do not belong to the domain of the function definition");
                     break;
                 }
-                G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
-                printf("G=%lf\n", G);
+                G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / denominator;
+                printf("G =%lf\n", G);
                 break;
 
             case 2:
                 F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
-                printf("Result: ");
+                printf("F = ");
                 printf("%lf", F);
                 break;
 
@@ -39,7 +39,7 @@ int main()
                     break;
                 }
                 Y = log(2 * pow(a, 2) - 7 * a * x + 6 * pow(x, 2) + 1);
-                printf("Y=%lf\n", Y);
+                printf("Y =%lf\n", Y);
                 break;
 
             default:
