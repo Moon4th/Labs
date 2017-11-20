@@ -66,10 +66,10 @@ int main() {
                 printf("The input values do not belong to the domain of the function definition");
                 continue;
             }
-            G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
+            G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / denominator;
             results.values[i] = G;
-            printf("x=%lf", x);
-            printf("\tG=%lf\n", G);
+            printf("x =%lf", x);
+            printf("\tG =%lf\n", G);
             sprintf(p, "%lf", results.values[i]);
             strcat(result, p);
             strcat(G_result,p);
@@ -105,8 +105,8 @@ int main() {
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps - 1), i++) {
             F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
             results.values[i] = F;
-            printf("x=%lf", x);
-            printf("\tF=%lf\n", F);
+            printf("x =%lf", x);
+            printf("\tF =%lf\n", F);
             sprintf(p, "%lf", results.values[i]);
             strcat(result, p);
             strcat (F_result,p);
@@ -146,8 +146,8 @@ int main() {
             }
             Y = log(2 * pow(a, 2) - 7 * a * x + 6 * pow(x, 2) + 1);
             results.values[i] = Y;
-            printf("x=%lf", x);
-            printf("\tY=%lf\n", Y);
+            printf("x =%lf", x);
+            printf("\tY =%lf\n", Y);
             sprintf(p, "%lf", results.values[i]);
             strcat(result, p);
             strcat (Y_result,p);
