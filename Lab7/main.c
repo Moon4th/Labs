@@ -67,7 +67,7 @@ int main() {
                 printf("The input values do not belong to the domain of the function definition");
                 continue;
             }
-            G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
+            G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / denominator;
             results.values[i] = G;
             file = fopen("C:\\Users\\Nikita\\ClionProjects\\lab7\\text.txt","w+");
             fprintf(file, "%lf\n", results.values[i]);
@@ -76,8 +76,8 @@ int main() {
             fscanf (file,"%lf",&results.values[i]);
             fseek(file,+1,SEEK_CUR);
 
-            printf("x=%lf", x);
-            printf("\tG=%lf\n", results.values[i]);
+            printf("x =%lf", x);
+            printf("\tG =%lf\n", results.values[i]);
             sprintf(p, "%lf", results.values[i]);
             strcat(result, p);
             strcat(G_result,p);
@@ -120,8 +120,8 @@ int main() {
             fseek(file,0,SEEK_SET);
             fscanf (file,"%lf",&results.values[i]);
             fseek(file,+1,SEEK_CUR);
-            printf("x=%lf", x);
-            printf("\tF=%lf\n", results.values[i]);
+            printf("x =%lf", x);
+            printf("\tF =%lf\n", results.values[i]);
             sprintf(p, "%lf", results.values[i]);
             strcat(result, p);
             strcat (F_result,p);
@@ -168,8 +168,8 @@ int main() {
             fseek(file,0,SEEK_SET);
             fscanf (file,"%lf",&results.values[i]);
             fseek(file,+1,SEEK_CUR);
-            printf("x=%lf", x);
-            printf("\tY=%lf\n", results.values[i]);
+            printf("x =%lf", x);
+            printf("\tY =%lf\n", results.values[i]);
             sprintf(p, "%lf", results.values[i]);
             strcat(result, p);
             strcat (Y_result,p);
