@@ -58,9 +58,9 @@ int main() {
                         printf("The input values do not belong to the domain of the function definition");
                         continue;
                     }
-                    G = 4 * ( - 4 * pow (a ,2) + a * x + 5 * pow (x, 2)) / -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
+                    G = 4 * ( - 4 * pow (a ,2) + a * x + 5 * pow (x, 2)) / denominator;
                     results[i]=G;
-                    printf("x=%lf\tG=%lf\n",x,G);
+                    printf("x =%lf\tG =%lf\n",x,G);
                 }
                 break;
 
@@ -68,7 +68,7 @@ int main() {
                 for(x=x_min,i = 0;x<=x_max, i<steps;x += (x_max - x_min) / (steps - 1),i++){
                     F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
                     results[i]=F;
-                    printf("x=%lf\tG=%lf\n",x,F);
+                    printf("x =%lf\tG =%lf\n",x,F);
                 }
                 break;
 
@@ -80,7 +80,7 @@ int main() {
                     }
                     Y = log(2 * pow(a, 2) - 7 * a * x + 6 * pow(x, 2) + 1);
                     results[i]=Y;
-                    printf("x=%lf\tG=%lf\n",x,Y);
+                    printf("x =%lf\tG =%lf\n",x,Y);
                 }
                 break;
 
