@@ -10,9 +10,8 @@ int main() {
     double a, x, G, F, Y, x_max, x_min, minvalue, maxvalue, denominator, final_maxvalue, final_minvalue;
     int choice = 1, steps, i, counter = 0;
     char steps_s[str], x_max_s[str], x_min_s[str], result[str] = {0}, p[str], template[str], *index, G_result[str] = {0}, F_result[str] = {0}, Y_result[str] = {0};
-    struct mass {
-        double  values [size];
-    }results;
+    struct mass { double  values; };
+    struct mass results[size];
 
     while (choice != 0) {
 
@@ -32,7 +31,7 @@ int main() {
         printf("Enter maximum value of x:");
         scanf("%s", x_max_s);
         x_min = atof(x_min_s);
-        x_min = atof(x_max_s);
+        x_max = atof(x_max_s);
 
         while (x_min >= x_max) {
             printf("Maximum value of x should be grater than the minimum\n");
@@ -67,25 +66,25 @@ int main() {
                 continue;
             }
             G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / denominator;
-            results.values[i] = G;
-            printf("x =%lf", x);
-            printf("\tG =%lf\n", G);
-            sprintf(p, "%lf", results.values[i]);
+            results[i].values = G;
+            printf("x = %lf", x);
+            printf("\tG = %lf\n", G);
+            sprintf(p, "%lf", results[i].values);
             strcat(result, p);
             strcat(G_result,p);
         }
 
-        for (maxvalue = 0, i = 0, minvalue = results.values[0];
+        for (maxvalue = 0, i = 0, minvalue = results[0].values;
              i < steps; i++) {
-            if (results.values[i] > maxvalue)
-                maxvalue = results.values[i];
-            if (results.values[i] < minvalue)
-                minvalue = results.values[i];
+            if (results[i].values > maxvalue)
+                maxvalue = results[i].values;
+            if (results[i].values < minvalue)
+                minvalue = results[i].values;
         }
         final_maxvalue = maxvalue;
         final_minvalue = minvalue;
 
-        printf("Minimum value=%lf\n", minvalue);
+        printf("\nMinimum value=%lf\n", minvalue);
         printf("Maximum value=%lf\n", maxvalue);
         printf("Result string-%s\n", G_result);
 
@@ -100,30 +99,32 @@ int main() {
         }
         printf("Number of coincidences: %d\n", counter);
 
-        memset (results.values,0,size);
+        memset (results,0,size);
+
+        printf("**********************************\n");
 
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps - 1), i++) {
             F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
-            results.values[i] = F;
-            printf("x =%lf", x);
-            printf("\tF =%lf\n", F);
-            sprintf(p, "%lf", results.values[i]);
+            results[i].values = F;
+            printf("x = %lf", x);
+            printf("\tF = %lf\n", F);
+            sprintf(p, "%lf", results[i].values);
             strcat(result, p);
             strcat (F_result,p);
         }
 
-        for (maxvalue = 0, i = 0, minvalue = results.values[0];
+        for (maxvalue = 0, i = 0, minvalue = results[0].values;
              i < steps; i++) {
-            if (results.values[i] > maxvalue)
-                maxvalue = results.values[i];
-            if (results.values[i] < minvalue)
-                minvalue = results.values[i];
+            if (results[i].values > maxvalue)
+                maxvalue = results[i].values;
+            if (results[i].values < minvalue)
+                minvalue = results[i].values;
             if (maxvalue > final_maxvalue)
                 final_maxvalue = maxvalue;
             if (minvalue < final_minvalue)
                 final_minvalue = minvalue;
         }
-        printf("Minimum value=%lf\n", minvalue);
+        printf("\nMinimum value=%lf\n", minvalue);
         printf("Maximum value=%lf\n", maxvalue);
         printf("Result string-%s\n", F_result);
 
@@ -138,33 +139,35 @@ int main() {
         }
         printf("Number of coincidences: %d\n", counter);
 
-        memset (results.values,0,size);
+        memset (results,0,size);
+
+        printf("**********************************\n");
 
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps - 1), i++) {
             if (x < 0 || a < 0) {
                 printf("The input values do not belong to the domain of the function definition");
             }
             Y = log(2 * pow(a, 2) - 7 * a * x + 6 * pow(x, 2) + 1);
-            results.values[i] = Y;
-            printf("x =%lf", x);
-            printf("\tY =%lf\n", Y);
-            sprintf(p, "%lf", results.values[i]);
+            results[i].values = Y;
+            printf("x = %lf", x);
+            printf("\tY = %lf\n", Y);
+            sprintf(p, "%lf", results[i].values);
             strcat(result, p);
             strcat (Y_result,p);
         }
 
-        for (maxvalue = 0, i = 0, minvalue = results.values[0];
+        for (maxvalue = 0, i = 0, minvalue = results[0].values;
              i < steps; i++) {
-            if (results.values[i] > maxvalue)
-                maxvalue = results.values[i];
-            if (results.values[i] < minvalue)
-                minvalue = results.values[i];
+            if (results[i].values > maxvalue)
+                maxvalue = results[i].values;
+            if (results[i].values < minvalue)
+                minvalue = results[i].values;
             if (maxvalue > final_maxvalue)
                 final_maxvalue = maxvalue;
             if (minvalue < final_minvalue)
                 final_minvalue = minvalue;
         }
-        printf("Minimum value=%lf\n", minvalue);
+        printf("\nMinimum value=%lf\n", minvalue);
         printf("Maximum value=%lf\n", maxvalue);
         printf("Result string-%s\n", Y_result);
 
@@ -179,7 +182,7 @@ int main() {
         }
         printf("Number of coincidences: %d\n", counter);
 
-        printf ("Final maximum value = %lf\n",final_maxvalue);
+        printf ("\nFinal maximum value = %lf\n",final_maxvalue);
         printf ("Final minimum value = %lf\n",final_minvalue);
         printf("Final result string-%s\n", result);
 
@@ -193,7 +196,7 @@ int main() {
         }
         printf("Number of coincidences: %d\n", counter);
 
-        memset (results.values,0,size);
+        memset (results,0,size);
     }
     printf ("Shutdown...");
     return 0;
