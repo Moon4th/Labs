@@ -10,9 +10,13 @@ int main() {
 
     double a, x, G, F, Y, x_max, x_min, minvalue, maxvalue, denominator, final_maxvalue, final_minvalue;
     int choice = 1, steps, i, counter = 0;
-    char steps_s[str], x_max_s[str], x_min_s[str], result[str] = {0}, p[str], template[str], *index, G_result[str] = {0}, F_result[str] = {0}, Y_result[str] = {0};
-    struct mass { double  values; };
-    struct mass results[size];
+    char steps_s[str], x_max_s[str], x_min_s[str], result[str] = {0}, p[str], template[str];
+    char *index, G_result[str] = {0}, F_result[str] = {0}, Y_result[str] = {0};
+    char file_name[str] = "C:\\Users\\Nikita\\ClionProjects\\lab7\\Values.txt";
+    typedef struct {
+        double  values;
+    }value;
+    value results[size];
 
     while (choice != 0) {
 
@@ -59,6 +63,8 @@ int main() {
             break;
         }
 
+        file = fopen(file_name,"w+");
+
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps -
                                                                           1), i++) {
             denominator = -20 * pow(a, 2) + 28 * a * x + 3 * pow(x, 2);
@@ -68,20 +74,17 @@ int main() {
             }
             G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / denominator;
             results[i].values = G;
-            file = fopen("C:\\Users\\Nikita\\ClionProjects\\lab7\\text.txt","w+");
             fprintf(file, "%lf\n", results[i].values);
             results[i].values = 0;
-            fseek(file,0,SEEK_SET);
-            fscanf (file,"%lf",&results[i].values);
-            fseek(file,+1,SEEK_CUR);
+        }
 
+        fseek(file,0,SEEK_SET);
+        for (i = 0, x = x_min; i < steps;x += (x_max - x_min) / (steps - 1),i++){
+            fscanf (file,"%lf",&results[i].values);
             printf("x = %lf", x);
             printf("\tG = %lf\n", results[i].values);
-            sprintf(p, "%lf", results[i].values);
-            strcat(result, p);
-            strcat(G_result,p);
+            fseek(file,0,SEEK_CUR);
         }
-        fclose (file);
 
         for (maxvalue = 0, i = 0, minvalue = results[0].values;
              i < steps; i++) {//Нахождение максимального и минимального значения
@@ -92,6 +95,12 @@ int main() {
         }
         final_maxvalue = maxvalue;
         final_minvalue = minvalue;
+
+        for (i=0;i<steps;i++){
+            sprintf(p,"%lf",results[i].values);
+            strcat(result,p);
+            strcat(G_result,p);
+        }
 
         printf("\nMinimum value = %lf\n", minvalue);
         printf("Maximum value = %lf\n", maxvalue);
@@ -106,28 +115,26 @@ int main() {
             counter++;
             index = strstr(G_result, template);
         }
-        printf("Number of coincidences: %d\n", counter);
-
-        memset (results,0,size);
+        printf("Number of coincidences: %d\n\n", counter);
 
         printf("**********************************\n");
+
+        file = fopen(file_name,"w+");
 
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps - 1), i++) {
             F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
             results[i].values = F;
-            file = fopen("C:\\Users\\Nikita\\ClionProjects\\lab7\\text.txt","w+");
             fprintf(file, "%lf\n", results[i].values);
             results[i].values = 0;
-            fseek(file,0,SEEK_SET);
+        }
+
+        fseek(file,0,SEEK_SET);
+        for (i = 0, x = x_min; i < steps;x += (x_max - x_min) / (steps - 1),i++){
             fscanf (file,"%lf",&results[i].values);
-            fseek(file,+1,SEEK_CUR);
             printf("x = %lf", x);
             printf("\tF = %lf\n", results[i].values);
-            sprintf(p, "%lf", results[i].values);
-            strcat(result, p);
-            strcat (F_result,p);
+            fseek(file,0,SEEK_CUR);
         }
-        fclose (file);
 
         for (maxvalue = 0, i = 0, minvalue = results[0].values;
              i < steps; i++) {
@@ -140,6 +147,13 @@ int main() {
             if (minvalue < final_minvalue)
                 final_minvalue = minvalue;
         }
+
+        for (i=0;i<steps;i++){
+            sprintf(p,"%lf",results[i].values);
+            strcat(result,p);
+            strcat(F_result,p);
+        }
+
         printf("\nMinimum value = %lf\n", minvalue);
         printf("Maximum value = %lf\n", maxvalue);
         printf("Result string - %s\n", F_result);
@@ -153,11 +167,12 @@ int main() {
             counter++;
             index = strstr(F_result, template);
         }
-        printf("Number of coincidences: %d\n", counter);
+        printf("Number of coincidences: %d\n\n", counter);
 
-        memset (results,0,size);
 
         printf("**********************************\n");
+
+        file = fopen(file_name,"w+");
 
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps - 1), i++) {
             if (x < 0 || a < 0) {
@@ -165,19 +180,17 @@ int main() {
             }
             Y = log(2 * pow(a, 2) - 7 * a * x + 6 * pow(x, 2) + 1);
             results[i].values = Y;
-            file = fopen("C:\\Users\\Nikita\\ClionProjects\\lab7\\text.txt","w+");
             fprintf(file, "%lf\n", results[i].values);
             results[i].values = 0;
-            fseek(file,0,SEEK_SET);
+        }
+
+        fseek(file,0,SEEK_SET);
+        for (i = 0, x = x_min; i < steps;x += (x_max - x_min) / (steps - 1),i++){
             fscanf (file,"%lf",&results[i].values);
-            fseek(file,+1,SEEK_CUR);
             printf("x = %lf", x);
             printf("\tY = %lf\n", results[i].values);
-            sprintf(p, "%lf", results[i].values);
-            strcat(result, p);
-            strcat (Y_result,p);
+            fseek(file,0,SEEK_CUR);
         }
-        fclose (file);
 
         for (maxvalue = 0, i = 0, minvalue = results[i].values;
              i < steps; i++) {
@@ -190,6 +203,13 @@ int main() {
             if (minvalue < final_minvalue)
                 final_minvalue = minvalue;
         }
+
+        for (i=0;i<steps;i++){
+            sprintf(p,"%lf",results[i].values);
+            strcat(result,p);
+            strcat(Y_result,p);
+        }
+
         printf("\nMinimum value = %lf\n", minvalue);
         printf("Maximum value = %lf\n", maxvalue);
         printf("Result string - %s\n", Y_result);
@@ -219,8 +239,6 @@ int main() {
             index = strstr(result, template);
         }
         printf("Number of coincidences: %d\n", counter);
-
-        memset (results,0,size);
 
         fclose (file);
     }
