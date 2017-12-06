@@ -83,7 +83,6 @@ int main() {
             fscanf (file,"%lf",&results[i].values);
             printf("x = %lf", x);
             printf("\tG = %lf\n", results[i].values);
-            fseek(file,0,SEEK_CUR);
         }
 
         for (maxvalue = 0, i = 0, minvalue = results[0].values;
@@ -133,7 +132,6 @@ int main() {
             fscanf (file,"%lf",&results[i].values);
             printf("x = %lf", x);
             printf("\tF = %lf\n", results[i].values);
-            fseek(file,0,SEEK_CUR);
         }
 
         for (maxvalue = 0, i = 0, minvalue = results[0].values;
@@ -189,7 +187,6 @@ int main() {
             fscanf (file,"%lf",&results[i].values);
             printf("x = %lf", x);
             printf("\tY = %lf\n", results[i].values);
-            fseek(file,0,SEEK_CUR);
         }
 
         for (maxvalue = 0, i = 0, minvalue = results[i].values;
