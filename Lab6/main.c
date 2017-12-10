@@ -10,8 +10,10 @@ int main() {
     double a, x, G, F, Y, x_max, x_min, minvalue, maxvalue, denominator, final_maxvalue, final_minvalue;
     int choice = 1, steps, i, counter = 0;
     char steps_s[str], x_max_s[str], x_min_s[str], result[str] = {0}, p[str], template[str], *index, G_result[str] = {0}, F_result[str] = {0}, Y_result[str] = {0};
-    struct mass { double  values; };
-    struct mass results[size];
+    typedef struct {
+        double  values;
+    }var;
+    var results[size];
 
     while (choice != 0) {
 
