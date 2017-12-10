@@ -64,6 +64,7 @@ int main() {
         }
 
         file = fopen(file_name,"w+");
+        printf("data before:\n\n");
 
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps -
                                                                           1), i++) {
@@ -75,8 +76,12 @@ int main() {
             G = 4 * (-4 * pow(a, 2) + a * x + 5 * pow(x, 2)) / denominator;
             results[i].values = G;
             fprintf(file, "%lf\n", results[i].values);
+            printf("x = %lf", x);
+            printf("\tG = %lf\n", results[i].values);
             results[i].values = 0;
         }
+
+        printf("\ndata after:\n\n");
 
         fseek(file,0,SEEK_SET);
         for (i = 0, x = x_min; i < steps;x += (x_max - x_min) / (steps - 1),i++){
@@ -116,16 +121,21 @@ int main() {
         }
         printf("Number of coincidences: %d\n\n", counter);
 
-        printf("**********************************\n");
+        printf("**********************************\n\n");
 
         file = fopen(file_name,"w+");
+        printf("data before:\n\n");
 
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps - 1), i++) {
             F = atan(24 * pow(a, 2) - 25 * a * x + 6 * pow(x, 2));
             results[i].values = F;
             fprintf(file, "%lf\n", results[i].values);
+            printf("x = %lf", x);
+            printf("\tF = %lf\n", results[i].values);
             results[i].values = 0;
         }
+
+        printf("\ndata after:\n\n");
 
         fseek(file,0,SEEK_SET);
         for (i = 0, x = x_min; i < steps;x += (x_max - x_min) / (steps - 1),i++){
@@ -168,9 +178,10 @@ int main() {
         printf("Number of coincidences: %d\n\n", counter);
 
 
-        printf("**********************************\n");
+        printf("**********************************\n\n");
 
         file = fopen(file_name,"w+");
+        printf("data before:\n\n");
 
         for (x = x_min, i = 0; x <= x_max, i < steps; x += (x_max - x_min) / (steps - 1), i++) {
             if (x < 0 || a < 0) {
@@ -179,8 +190,12 @@ int main() {
             Y = log(2 * pow(a, 2) - 7 * a * x + 6 * pow(x, 2) + 1);
             results[i].values = Y;
             fprintf(file, "%lf\n", results[i].values);
+            printf("x = %lf", x);
+            printf("\tY = %lf\n", results[i].values);
             results[i].values = 0;
         }
+
+        printf("\ndata after:\n\n");
 
         fseek(file,0,SEEK_SET);
         for (i = 0, x = x_min; i < steps;x += (x_max - x_min) / (steps - 1),i++){
